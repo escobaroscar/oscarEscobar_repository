@@ -2,7 +2,7 @@ import { IsArray, IsIn, IsInt, IsNumber, IsOptional,
     IsPositive, IsString, MinLength 
 } from 'class-validator';
 
-export class CreateOrganizationDto{
+export class CreateMetricDto{
     @IsString()
     readonly name: string;
     

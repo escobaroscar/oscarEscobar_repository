@@ -5,9 +5,11 @@ import { OrganizationModule } from './organization/organization.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { URL } from "url";
+import { TribuModule } from './tribu/tribu.module';
+import { DownlandModule } from './downland/downland.module';
 require('dotenv').config(); 
 
-const dbUrl = new URL("postgresql://oscar-ntt-data:3Bq9BIHqp0YTTZxz9YYf4w@free-tier14.aws-us-east-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&options=--cluster%3Ddb-ntt-data-4044");
+const dbUrl = new URL("postgresql://user_ntt_data:q06yTlGX-BfRR1yWkicDZA@free-tier14.aws-us-east-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&options=--cluster%3Dntt-datta-4073");
 const routingId = dbUrl.searchParams.get("options");
 dbUrl.searchParams.delete("options");
 
@@ -16,7 +18,7 @@ dbUrl.searchParams.delete("options");
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: "cockroachdb",
-      url: process.env.DATABASE_URL,
+      url: "postgresql://user_ntt_data:q06yTlGX-BfRR1yWkicDZA@free-tier14.aws-us-east-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&options=--cluster%3Dntt-datta-4073",
       ssl: true,
       extra: {
         options: routingId
@@ -28,7 +30,7 @@ dbUrl.searchParams.delete("options");
       logging:false,
   
     }),
-    RepositoryModule, OrganizationModule],
+    RepositoryModule, OrganizationModule, TribuModule, DownlandModule],
   controllers: [],
   providers: [AppService],
 })

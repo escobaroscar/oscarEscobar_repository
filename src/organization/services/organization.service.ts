@@ -13,6 +13,16 @@ export class OrganizationService {
         @InjectRepository(OrganizationEntity)
         private readonly organizationRepository: Repository<OrganizationEntity>,
       ) {}
+
+      async findOrganization(id: number) {
+
+         let findOrganization = await this.organizationRepository.findOne({ where: { id: id } });
+        if (!findOrganization) {
+          findOrganization = null;
+        }
+        return findOrganization;
+      }
+
       findAll() {
             return this.organizationRepository.find();
       }

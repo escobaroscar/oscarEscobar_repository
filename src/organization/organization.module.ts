@@ -9,6 +9,7 @@ import { OrganizationService } from './services/organization.service';
   providers: [OrganizationService],
   imports:[
     TypeOrmModule.forFeature([OrganizationEntity])
-  ]
+  ],
+  exports:[OrganizationService]
 })
 export class OrganizationModule {}
