@@ -1,5 +1,6 @@
 export interface Repository {
-    id_tribe?:number;
+    id:number;
+    id_tribe:number;
     name:string;
     state:string;
     create_timer_timestamp?: Date;
