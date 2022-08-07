@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { CreateTribeDto } from '../dtos/tribe.dto';
 import { TribuService } from '../services/tribu.service';
 
@@ -9,5 +9,9 @@ export class TribuController {
     create(@Body() tribeDto: CreateTribeDto) {
       return this.tribeService.create(tribeDto);
     }
-
+    
+    @Get(':id')
+    getTribeById(@Param('id', ParseIntPipe ) id: number) {
+      return this.tribeService.findTribu( id );
+    }
 }

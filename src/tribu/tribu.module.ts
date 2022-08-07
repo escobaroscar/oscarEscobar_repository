@@ -12,6 +12,7 @@ import { OrganizationModule } from 'src/organization/organization.module';
     OrganizationModule,
     TypeOrmModule.forFeature([TribeEntity])
   ],
+  exports: [TribuService]
   
   
 })
