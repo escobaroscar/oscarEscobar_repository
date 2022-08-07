@@ -1,5 +1,5 @@
 export interface Metric {
-    id:number;
+    id_repository:number;
     coverage:number;
     bugs:number;
     vulnerabilities:number;

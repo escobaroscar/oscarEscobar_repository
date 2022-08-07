@@ -7,21 +7,20 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { URL } from "url";
 import { TribuModule } from './tribu/tribu.module';
 import { DownlandModule } from './downland/downland.module';
-require('dotenv').config(); 
-
-const dbUrl = new URL("postgresql://user_ntt_data:q06yTlGX-BfRR1yWkicDZA@free-tier14.aws-us-east-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&options=--cluster%3Dntt-datta-4073");
-const routingId = dbUrl.searchParams.get("options");
-dbUrl.searchParams.delete("options");
+import { MetricModule } from './metric/metric.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      envFilePath:'.env',
+      isGlobal:true,
+    }),
     TypeOrmModule.forRoot({
       type: "cockroachdb",
-      url: "postgresql://user_ntt_data:q06yTlGX-BfRR1yWkicDZA@free-tier14.aws-us-east-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&options=--cluster%3Dntt-datta-4073",
+      url: process.env.DATABASE_URL,
       ssl: true,
       extra: {
-        options: routingId
+        options: process.env.DATABASE_ROUTINGID
       },
       entities:['dist/**/*.entity{.ts,.js}'],
       synchronize:false,
@@ -30,7 +29,7 @@ dbUrl.searchParams.delete("options");
       logging:false,
   
     }),
-    RepositoryModule, OrganizationModule, TribuModule, DownlandModule],
+    RepositoryModule, OrganizationModule, TribuModule, DownlandModule, MetricModule],
   controllers: [],
   providers: [AppService],
 })

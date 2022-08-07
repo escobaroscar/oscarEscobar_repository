@@ -1,12 +1,31 @@
-import { IsArray, IsIn, IsInt, IsNumber, IsOptional, 
+import { IsArray, IsIn, IsInt, IsNotEmpty, isNotEmpty, IsNumber, IsOptional, 
     IsPositive, IsString, MinLength 
 } from 'class-validator';
 
 export class CreateMetricDto{
-    @IsString()
-    readonly name: string;
-    
+
     @IsNumber()
     @IsPositive()
-    readonly status: number;
+    @IsNotEmpty()
+    readonly id_repository:number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    readonly coverage:number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    readonly bugs:number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    readonly vulnerabilities:number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    readonly hostpot:number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    readonly code_smells:number;
 }
